@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Обучение игре "Окей 101"</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #ffcc00, #ff9900);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        header {
+            text-align: center;
+            padding: 50px 20px;
+            background: #444;
+            color: white;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background: #333;
+            padding: 10px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        nav a:hover {
+            background: #ffcc00;
+            color: #000;
+        }
+
+        main {
+            padding: 20px;
+            text-align: center;
+        }
+
+        section {
+            margin-bottom: 50px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            animation: slideIn 1s ease-out;
+        }
+
+        footer {
+            background: #444;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .profile img {
+            border-radius: 15px;
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+        }
+
+        .profile h2 {
+            color: #ff6600;
+        }
+
+        .task-button {
+            display: inline-block;
+            background: #ff6600;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .task-button:hover {
+            background: #cc5200;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.5s ease;
+        }
+
+        .modal h3 {
+            margin-bottom: 15px;
+        }
+
+        .modal button {
+            background: #ff6600;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .modal button:hover {
+            background: #cc5200;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 500;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Обучение игре "Окей 101"</h1>
+        <p>Станьте мастером игры через интерактивные задачи и советы!</p>
+    </header>
+
+    <nav>
+        <a href="#rules">Правила</a>
+        <a href="#examples">Примеры</a>
+        <a href="#tasks">Задачи</a>
+        <a href="#profile">Контакты</a>
+    </nav>
+
+    <main>
+        <section id="rules">
+            <h2>Основные правила игры</h2>
+            <p>"Окей 101" — игра, где цель состоит в сборе комбинаций из плиток. Побеждает тот, кто первым избавится от всех плиток.</p>
+            <ul>
+                <li>У вас 14 плиток.</li>
+                <li>Создавайте комбинации из рядов или групп.</li>
+                <li>Каждый ход берите или сбрасывайте плитку.</li>
+            </ul>
+        </section>
+
+        <section id="examples">
+            <h2>Примеры комбинаций</h2>
+            <p>Вот что можно собрать:</p>
+            <ul>
+                <li>Ряд: 5♠️, 6♠️, 7♠️.</li>
+                <li>Группа: 7♠️, 7♣️, 7♦️.</li>
+            </ul>
+        </section>
+
+        <section id="tasks">
+            <h2>Задачи</h2>
+            <p>Попробуйте решить задачи ниже:</p>
+            <button class="task-button" onclick="showTask(1)">Задача 1</button>
+            <button class="task-button" onclick="showTask(2)">Задача 2</button>
+        </section>
+
+        <section id="profile" class="profile">
+            <img src="photo.jpg" alt="Доктор Абусамедов Реван">
+            <h2>Доктор Абусамедов Реван</h2>
+            <p>Жду ваши приглашения на игру в "Окей 101"!</p>
+        </section>
+    </main>
+
+    <div class="overlay" id="overlay" onclick="hideModal()"></div>
+
+    <div class="modal" id="modal1">
+        <h3>Задача 1</h3>
+        <p>У вас на руках плитки: 5♠️, 6♠️, 8♠️. Какую плитку вам нужно найти для завершения комбинации?</p>
+        <button onclick="hideModal()">Закрыть</button>
+    </div>
+
+    <div class="modal" id="modal2">
+        <h3>Задача 2</h3>
+        <p>Составьте группу из плиток 9♠️, 9♦️ и одну недостающую плитку. Какую плитку добавите?</p>
+        <button onclick="hideModal()">Закрыть</button>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Обучение игре "Окей 101". Все права защищены.</p>
+    </footer>
+
+    <script>
+        function showTask(taskNumber) {
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('modal' + taskNumber).style.display = 'block';
+        }
+
+        function hideModal() {
+            document.getElementById('overlay').style.display = 'none';
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.style.display = 'none';
+            });
+        }
+    </script>
+</body>
+</html>
